@@ -40,11 +40,18 @@ public:
         {
             cout << "Linked_List Is Empty.";
         }
-        
-        Node* newNode = new Node(data);
-        newNode->link = this->head;
-        this->head = newNode;
-        this->size++;
+        else
+        {
+            Node*ptr = this->head;
+            while (ptr->link != 0)
+            {
+                ptr = ptr->link;
+            }
+
+            Node* newNode = new Node(data);
+            ptr->link = this->head;
+            this->size++;
+        }
     }
     void InsertAtIndex(int data,int index);
    
