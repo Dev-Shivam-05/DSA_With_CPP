@@ -26,6 +26,7 @@ public:
         this->size = 0;
     }
 
+    // Insert At End
     void InsertAtFront(int data)
     {
         Node* newNode = new Node(data);
