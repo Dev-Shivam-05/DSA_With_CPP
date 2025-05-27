@@ -37,7 +37,7 @@ public:
 
     void InsertAtEnd(int data)
     {
-        if (this->head = NULL)
+        if (this->head == NULL)
         {
             cout << "Linked_List Is Empty.";
         }
@@ -50,27 +50,54 @@ public:
             }
 
             Node* newNode = new Node(data);
-            ptr->link = this->head;
+            // ptr->link = this->head;
             this->size++;
+            this->head = ptr;
         }
     }
-    void InsertAtIndex(int data,int index);
+    void InsertAtIndex(int data,int index)
+    {
+        Node* ptr = this->head;
+        Node* newNode = new Node(data);
+        for (int i = 0; i < index - 1; i++)
+        {
+            ptr = ptr->link; 
+        }
+        ptr->link = newNode;
+        this->head = ptr;
+    }
    
-    void DeleteAtFront();
-    void DeleteAtEnd();
-    void DeleteAtIndex(int index);
+    void DeleteAtFront() {}
+    void DeleteAtEnd() {}
+    void DeleteAtIndex(int index) {}
     
-    void Update(int data,int index);
+    void Update(int data_1,int index)
+    {
+        Node* ptr = this->head;
+        for (int i = 0; i < index - 1; i++)
+        {
+            ptr = ptr->link;    
+        }
+        ptr->link->data = data_1;
+    }
 
     int is_empty();
 
     void printview()
     {
-        Node* ptr = this->head;
-        cout << "Given Linked List is :- " << endl;
-        while (ptr->link != NULL)
+        if (this->head == NULL)
         {
-            cout << ptr->data << " ";
+            cout << endl << "---- Sorry Linked List Is Empty ----" << endl;
+        }
+        else
+        {
+            Node* ptr = this->head;
+            cout << "Given Linked List is :- " << endl;
+            while (ptr->link != NULL)
+            {
+                cout << ptr->data << " ";
+                ptr = ptr->link;
+            }
         }
     }
 };
