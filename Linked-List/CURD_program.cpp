@@ -81,23 +81,44 @@ public:
    
     void DeleteAtFront() 
     {
-        Node *ptr = this->head;
-        this->head = this->head->link;
+        if (this->head == NULL)
+        {
+            cout << "Therefor ! The List Is Empty" << endl;
+            return;
+        }
+        else
+        {
+            this->head = this->head->link;
+        }
+        
     }
 
     void DeleteAtEnd()
     {
-        Node* ptr = this->head;
-
-        while (ptr->link->link != NULL)
+        if (this->head == NULL)
         {
-            ptr = ptr->link;
+            cout << "Therefor ! The List Is Empty" << endl;
+            return;
         }
-        ptr->link = NULL;
+        else
+        {
+            Node* ptr = this->head;
+
+            while (ptr->link->link != NULL)
+            {
+                ptr = ptr->link;
+            }
+            ptr->link = NULL;
+        }
     }
 
     void DeleteAtIndex(int index) 
     {
+        if (this->head == NULL)
+        {
+            cout << "Therefor ! The List Is Empty" << endl;
+            return;
+        }
         
         if (index >= 0 && index < 0)
         {
@@ -215,7 +236,10 @@ int main()
 
         case 8:
             l.printview();
+            break;
         default:
+            cout << "Wrong Choice !" << endl;
+            break;
         }
 
     } while (choice != 0);
