@@ -37,39 +37,83 @@ public:
 
     void InsertAtEnd(int data)
     {
+        Node* newNode = new Node(data);
         if (this->head == NULL)
         {
-            cout << "Linked_List Is Empty.";
+            this->head = newNode;
         }
         else
         {
             Node*ptr = this->head;
-            while (ptr->link != 0)
+            while (ptr->link != NULL)
             {
                 ptr = ptr->link;
             }
-
-            Node* newNode = new Node(data);
-            // ptr->link = this->head;
+            ptr->link = newNode;
             this->size++;
-            this->head = ptr;
         }
     }
-    void InsertAtIndex(int data,int index)
-    {
-        Node* ptr = this->head;
-        Node* newNode = new Node(data);
-        for (int i = 0; i < index - 1; i++)
-        {
-            ptr = ptr->link; 
+    void InsertAtIndex()
+    {    
+        int index,data;
+        cout << "Enter Index Number To Insert :- ";
+        cin >> index;
+        if (index >= 0 && index < this->size)
+        {                    
+            cout << endl;
+            cout << "Enter Element To Insert :- ";
+            cin >> data;
+
+            Node* ptr = this->head;
+            Node* newNode = new Node(data);
+            for (int i = 0; i < index - 1; i++)
+            {
+                ptr = ptr->link; 
+            }
+            newNode->link = ptr->link;
+            ptr->link = newNode;
         }
-        ptr->link = newNode;
-        this->head = ptr;
+        else
+        {
+            cout << "Sorry ! The Index Is Out Of Bount";
+        }
     }
    
-    void DeleteAtFront() {}
-    void DeleteAtEnd() {}
-    void DeleteAtIndex(int index) {}
+    void DeleteAtFront() 
+    {
+        Node *ptr = this->head;
+        this->head = this->head->link;
+    }
+
+    void DeleteAtEnd()
+    {
+        Node* ptr = this->head;
+
+        while (ptr->link->link != NULL)
+        {
+            ptr = ptr->link;
+        }
+        ptr->link = NULL;
+    }
+
+    void DeleteAtIndex(int index) 
+    {
+        
+        if (index >= 0 && index < 0)
+        {
+            Node* ptr = this->head;
+            for (int i = 0; i < index; i++)
+            {
+                ptr = ptr->link;
+            }
+            ptr->link = ptr->link->link;
+        }
+        else
+        {
+            cout << "Sorry ! Index Is Out Of Bound" << endl;
+        } 
+        cout << endl;
+    }
     
     void Update(int data_1,int index)
     {
@@ -81,24 +125,25 @@ public:
         ptr->link->data = data_1;
     }
 
-    int is_empty();
-
     void printview()
     {
         if (this->head == NULL)
         {
             cout << endl << "---- Sorry Linked List Is Empty ----" << endl;
         }
+
         else
         {
             Node* ptr = this->head;
             cout << "Given Linked List is :- " << endl;
-            while (ptr->link != NULL)
+            while (ptr != NULL)
             {
                 cout << ptr->data << " ";
                 ptr = ptr->link;
             }
+            cout << endl;
         }
+
     }
 };
 
@@ -140,12 +185,7 @@ int main()
             break;
         
         case 3:
-            cout << "Enter Index Number To Insert :- ";
-            cin >> index;
-            cout << endl;
-            cout << "Enter Element To Insert :- ";
-            cin >> element;
-            l.InsertAtIndex(element,index);
+            l.InsertAtIndex();
             break;
         
         case 4:
@@ -176,7 +216,6 @@ int main()
         case 8:
             l.printview();
         default:
-            break;
         }
 
     } while (choice != 0);
