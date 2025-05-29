@@ -116,11 +116,11 @@ public:
     {
         if (this->head == NULL)
         {
-            cout << "Therefor ! The List Is Empty" << endl;
+            cout << "Therefore ! The List Is Empty" << endl;
             return;
         }
         
-        if (index >= 0 && index < 0)
+        if (index >= 0 && index < this->size)
         {
             Node* ptr = this->head;
             for (int i = 0; i < index; i++)
