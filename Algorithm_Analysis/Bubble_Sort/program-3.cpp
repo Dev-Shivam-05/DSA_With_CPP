@@ -3,6 +3,8 @@ using namespace std;
 
 void PrintArray(int [],int);
 void BubbleSort(int [],int);
+int LargestElement(int [],int);
+int SmallestElement(int [],int);
 
 int main()
 {
@@ -26,6 +28,7 @@ int main()
         cout << "Press 1 To Print Orignal Array." << endl;
         cout << "Press 2 To Sort Array." << endl;
         cout << "Press 3 To Print Sort Array." << endl;
+        cout << "Press 4 To Find The Largest Element From Array." << endl;
         cout << "Press 0 To Exit." << endl;
 
         cout << "Enter Your Choice :- ";
@@ -52,6 +55,14 @@ int main()
         case 3:
             BubbleSort(array,size);
             PrintArray(array,size);
+            break;
+        
+        case 4:
+            cout << "The Largest Element Of The Array Is :- " << LargestElement(array,size) << endl;        
+            break;
+
+        case 5:
+            cout << "The Smallest Element Of The Array Is :- " << SmallestElement(array,size) << endl;        
             break;
 
         default:
@@ -86,10 +97,46 @@ void BubbleSort(int arr[],int size)
                 arr[i + 1] = arr[i] - arr[i + 1];
                 arr[i] = arr[i] - arr[i + 1]; 
             }
-            cout << arr[i] << " ";
         }
-        cout << endl;
         pass++;
     }
     cout << endl;
+}
+
+int LargestElement(int arr[],int size)
+{
+    int pass = 1;
+    while (pass < 2)
+    {
+        for (int i = 0; i < size - pass; i++)
+        {
+            if (arr[i] > arr[i + 1])
+            {
+                arr[i] = arr[i] + arr[i + 1]; 
+                arr[i + 1] = arr[i] - arr[i + 1];
+                arr[i] = arr[i] - arr[i + 1]; 
+            }
+        }
+        pass++;       
+    }
+    return arr[size - 1];
+}
+
+int SmallestElement(int arr[],int size)
+{
+    int pass = 1;
+    while (pass < size)
+    {
+        for (int i = 0; i < size - pass; i++)
+        {
+            if (arr[i] > arr[i + 1])
+            {
+                arr[i] = arr[i] + arr[i + 1]; 
+                arr[i + 1] = arr[i] - arr[i + 1];
+                arr[i] = arr[i] - arr[i + 1]; 
+            }
+        }
+        pass++;       
+    }
+    return arr[size - pass];
 }
