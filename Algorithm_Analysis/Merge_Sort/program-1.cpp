@@ -1,81 +1,86 @@
 #include<iostream>
+#include<vector>
 using namespace std;
 
-class Merge
+void merge(vector<int>& array,int start,int mid,int end)
 {
-protected:
-    int array[]
-    int size;
-public:
-    Merge(int array[],int size)
+    vector<int> temp;
+    int i = start , j = mid + 1;
+
+    while (i <= mid)
     {
-        this->array = this->array;
-        this->size = this->size;
+        if (array[i] > array[j])
+        {
+            temp.push_back(array[i++]);
+        }
+        else
+        {
+            temp.push_back(array[j++]);
+        }
     }
-    void merge(int array[],int size)
+
+    while (i <= mid)
     {
-        int left = 0,
-        right = size - 1,
-        mid = (left - right) / 2;
-
-        int size_array_1 = left + mid;
-        int size_array_2 = (mid + 1) - right;
-
-        int temp_array_1[size_array_1];
-        int temp_array_2[size_array_2];
-
-        for (int i = 0; i < size_array_1; i++)
-        {
-            temp_array_1[i] = array[i];
-        }
-        
-        for (int i = 0; i < size_array_2; i++)
-        {
-            temp_array_2[i] = array[i];
-        }
-
-        // For 1st Part  
-        while (left > mid)
-        {
-            if (array[left] > array[left + 1])
-            {
-                swap(array[left],array[left + 1]);
-            }
-        }
-        
-        // For 2nd Part  
-        while (mid + 1)
-        {
-            if (array[left] > array[left + 1])
-            {
-                swap(array[left],array[left + 1]);
-            }
-        }
-        
+        temp.push_back(array[i++]);
     }
-};
 
-class MergeSort : public Merge
+    while (j <= end)
+    {
+        temp.push_back(array[j++]);
+    }
+
+    for (int k = 0; k < temp.size(); k++)
+    {
+        array[start + k] = temp[k];
+    }
+    
+}
+
+void merge_sort(vector<int>& array,int start,int end)
 {
-public:
+    if (start >= end)
+    {
+        return;
+    }
 
-};
+    int mid = start - (end - start) / 2;
+
+    merge_sort(array,start,mid);
+    merge_sort(array,mid + 1,end);
+    merge(array,start,mid,end);
+}
+
+void Display(vector<int>& array,int size)
+{
+    for (int i = 0; i < size; i++)
+    {
+        cout << array.at(i) << " ";
+    }
+}
 
 int main()
 {
-    int size; 
+    int size,num;
 
     cout << "Enter The Size Of Array :- ";
     cin >> size;
 
-    int array[size];
+    vector<int> array(size);
 
-    cout << endl << "Enter " << size << " Elements In Array Of :- " << endl << endl;
+    cout << "Enter " << size << " Elements :- " << endl;
     for (int i = 0; i < size; i++)
     {
-        cout << "Array[" << i + 1 << "] :- ";
+        cout << "Array[" << i << "] :- ";
         cin >> array[i];
     }
+
+    cout << endl << "The Unsorted Array Is :- ";
+    Display(array,size);
     
+    merge_sort(array , 0 , size - 1);
+
+    cout << endl << "The Sorted Array Is :- ";
+    Display(array,size);
+
     return 0;
 }
