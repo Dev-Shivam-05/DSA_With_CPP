@@ -38,7 +38,7 @@ int main()
 {
     // Taking Input Of Size Of The Array
     int size;
-    cout << "ENter The Size Of Array :- ";
+    cout << "Enter The Size Of Array :- ";
     cin >> size;
 
     // Declared A Dynamic Array

@@ -26,7 +26,7 @@ public:
         this->size = 0;
     }
 
-    // Insert At End
+    // Insert At Front
     void InsertAtFront(int data)
     {
         Node* newNode = new Node(data);
@@ -104,7 +104,7 @@ public:
         {
             Node* ptr = this->head;
 
-            while (ptr->link->link != NULL)
+        while (ptr->link->link != NULL)
             {
                 ptr = ptr->link;
             }
